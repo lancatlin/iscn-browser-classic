@@ -4,10 +4,19 @@ async function render(partial_name, context) {
   elem.innerHTML = block;
   const dataBindings = elem.querySelectorAll("[data-bind]");
   dataBindings.forEach(elem => {
-    bindValue(elem,
-      context[elem.getAttribute("data-bind")]);
+    bindValue(elem, contextValue(elem, context));
   });
   return elem;
+}
+
+function contextValue(elem, context) {
+  const keys = elem.getAttribute("data-bind").split("|")
+  for (const key of keys) {
+    if (context[key]) {
+      return context[key]
+    }
+  }
+  return "No data"
 }
 
 function bindValue(elem, value) {
