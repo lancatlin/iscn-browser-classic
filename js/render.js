@@ -16,7 +16,7 @@ function contextValue(elem, context) {
       return context[key]
     }
   }
-  return "No data"
+  return null
 }
 
 function bindAttribute(elem, value) {

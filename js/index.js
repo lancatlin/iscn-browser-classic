@@ -14,7 +14,7 @@ async function loadBlocks() {
     const content = record.tx.body.messages[0].record.contentMetadata;
     document.getElementById('block-list').appendChild(await render("block", {
       iscn,
-      datetime_string,
+      timestamp: datetime_string,
       ...content,
     }));
   }
