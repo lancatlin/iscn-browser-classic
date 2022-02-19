@@ -1,5 +1,6 @@
 import DataBinding from "./databinding.js";
 import Observable from "./observable.js";
+import render from "./render.js";
 console.log("hello");
 
 const ctx = {
@@ -11,16 +12,13 @@ setTimeout(() => {
   ctx.n1.update("Timeout!!");
 }, 1000);
 
-async function loadBlock() {
-  const res = await axios.get('./partials/block.html');
-  return res.data;
+async function test() {
+  const ctx = {
+    title: new Observable("This is a title!"),
+    description: new Observable("This is the description."),
+  };
+  document.getElementById('block-list').appendChild(await render("block", ctx));
+  setTimeout(() => ctx.description.update("Timeout"), 1000)
 }
 
-async function renderBlock() {
-  const block = await loadBlock();
-  const elem = document.createElement("div");
-  elem.innerHTML = block;
-  document.getElementById("block-list").appendChild(elem);
-}
-
-renderBlock();
+test();
