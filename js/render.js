@@ -21,6 +21,9 @@ function contextValue(elem, context) {
 
 function bindAttribute(elem, value) {
   const attr = elem.getAttribute("data-attr")
+  if (!value) {
+    elem.hidden = true;
+  }
   if (!attr) {
     elem.innerHTML = value;
   } else {
