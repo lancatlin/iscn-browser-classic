@@ -6,6 +6,10 @@ async function render(partial_name, context) {
   dataBindings.forEach(elem => {
     bindValue(elem, contextValue(elem, context));
   });
+  const attrBindings = elem.querySelectorAll("[data-attr]");
+  attrBindings.forEach(elem => {
+    bindAttribute(elem, context[elem.getAttribute("data-value")]);
+  });
   return elem;
 }
 
@@ -22,6 +26,11 @@ function contextValue(elem, context) {
 function bindValue(elem, value) {
   elem.innerHTML = value;
   // observable.subscribe(() => elem.innerHTML = observable.value);
+}
+
+function bindAttribute(elem, value) {
+  const attr = elem.getAttribute("data-attr")
+  elem[attr] = value;
 }
 
 async function loadBlock(partial_name) {

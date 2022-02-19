@@ -19,8 +19,11 @@ async function loadBlocks() {
   for (const record of records) {
     console.log(record);
     const { timestamp } = record;
+    const iscn = `detail.html?iscn=${record.logs[0].events[0].attributes[0].value}`;
+    console.log(iscn);
     const content = record.tx.body.messages[0].record.contentMetadata;
     document.getElementById('block-list').appendChild(await render("block", {
+      iscn,
       timestamp,
       ...content,
     }));
