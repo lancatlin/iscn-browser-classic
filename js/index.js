@@ -17,9 +17,13 @@ async function loadBlocks() {
   const records = res.data.tx_responses;
   console.log(records)
   for (const record of records) {
-    const content = record.tx.body.messages[0].record.contentMetadata
-    console.log(content)
-    document.getElementById('block-list').appendChild(await render("block", content));
+    console.log(record);
+    const { timestamp } = record;
+    const content = record.tx.body.messages[0].record.contentMetadata;
+    document.getElementById('block-list').appendChild(await render("block", {
+      timestamp,
+      ...content,
+    }));
   }
 }
 
