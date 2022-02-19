@@ -1,7 +1,7 @@
 import render from "./render.js";
 
 async function loadBlocks() {
-  const res = await axios.get(`https://mainnet-node.like.co/cosmos/tx/v1beta1/txs?pagination.limit=10&events=message.module='iscn'`)
+  const res = await axios.get(`https://mainnet-node.like.co/cosmos/tx/v1beta1/txs?pagination.limit=12&events=message.module='iscn'`)
   const records = res.data.tx_responses;
   console.log(records)
   for (const record of records) {
