@@ -10,10 +10,9 @@ async function render(partial_name, context) {
   return elem;
 }
 
-function bindValue(elem, observable) {
-  const initialValue = observable.value;
-  elem.innerHTML = initialValue;
-  observable.subscribe(() => elem.innerHTML = observable.value);
+function bindValue(elem, value) {
+  elem.innerHTML = value;
+  // observable.subscribe(() => elem.innerHTML = observable.value);
 }
 
 async function loadBlock(partial_name) {
