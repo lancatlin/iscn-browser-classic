@@ -2,13 +2,9 @@ async function render(partial_name, context) {
   const block = await loadBlock(partial_name);
   const elem = document.createElement("div");
   elem.innerHTML = block;
-  const dataBindings = elem.querySelectorAll("[data-bind]");
-  dataBindings.forEach(elem => {
-    bindValue(elem, contextValue(elem, context));
-  });
-  const attrBindings = elem.querySelectorAll("[data-attr]");
+  const attrBindings = elem.querySelectorAll("[data-bind]");
   attrBindings.forEach(elem => {
-    bindAttribute(elem, context[elem.getAttribute("data-value")]);
+    bindAttribute(elem, contextValue(elem, context));
   });
   return elem;
 }
@@ -23,14 +19,13 @@ function contextValue(elem, context) {
   return "No data"
 }
 
-function bindValue(elem, value) {
-  elem.innerHTML = value;
-  // observable.subscribe(() => elem.innerHTML = observable.value);
-}
-
 function bindAttribute(elem, value) {
   const attr = elem.getAttribute("data-attr")
-  elem[attr] = value;
+  if (!attr) {
+    elem.innerHTML = value;
+  } else {
+    elem[attr] = value;
+  }
 }
 
 async function loadBlock(partial_name) {
