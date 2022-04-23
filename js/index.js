@@ -2,7 +2,8 @@ import render from "./render.js"
 import { ENDPOINT, api } from "./config.js"
 
 async function loadBlocks() {
-  const res = await api.get(`/iscn/records?limit=12`)
+  const queryString = window.location.href.split("?")[1];
+  const res = await api.get(`/iscn/records?limit=12&${queryString}`)
   const records = res.data.records
   for (const record of records) {
     console.log(record);
