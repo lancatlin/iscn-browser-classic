@@ -1,0 +1,23 @@
+{
+  "name": "iscn-browser",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server . -P http://localhost:8997",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lancatlin/iscn-browser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lancatlin/iscn-browser/issues"
+  },
+  "homepage": "https://github.com/lancatlin/iscn-browser#readme",
+  "devDependencies": {
+    "http-server": "^14.1.0"
+  }
+}
