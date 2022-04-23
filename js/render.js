@@ -32,7 +32,7 @@ function bindAttribute(elem, value) {
 }
 
 async function loadBlock(partial_name) {
-  const res = await axios.get(`/partials/${partial_name}.html`);
+  const res = await axios.get(`./partials/${partial_name}.html`);
   return res.data;
 }
 
