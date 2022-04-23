@@ -32,9 +32,11 @@ async function loadRecord() {
     <li><a href="./?keywords=${k}">${k}</a></li>
     `).join("")
 
-  const fingerprintList = contentFingerprints.map(v => `
+  const fingerprintList = contentFingerprints
+    ? contentFingerprints.map(v => `
     <li><a target="_blank" href="${fingerprintLink(v)}">${v}</a></li>
     `).join("")
+    : null
 
   const ctx = {
     ...contentMetadata,

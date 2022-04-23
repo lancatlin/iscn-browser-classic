@@ -5,7 +5,7 @@ const tags = ["LikeCoin", "香港", "Cosmos"]
 
 function tagList() {
   document.getElementById("tags").innerHTML = tags.map(tag => `
-  <li><a href="/?keywords=${tag}">${tag}</a></li>
+  <li><a href="./?keywords=${tag}">${tag}</a></li>
   `).join("")
 }
 
