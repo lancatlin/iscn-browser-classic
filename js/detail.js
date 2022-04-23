@@ -12,7 +12,7 @@ function fingerprintLink(fingerprint) {
       return `https://arweave.net/${value}`
 
     default:
-      return `/?fingerprint=${fingerprint}`
+      return `./?fingerprint=${fingerprint}`
   }
 }
 
@@ -29,7 +29,7 @@ async function loadRecord() {
   document.title = name;
 
   const keywordList = keywords.split(",").map(k => `
-    <li><a href="/?keywords=${k}">${k}</a></li>
+    <li><a href="./?keywords=${k}">${k}</a></li>
     `).join("")
 
   const fingerprintList = contentFingerprints.map(v => `
@@ -39,7 +39,7 @@ async function loadRecord() {
   const ctx = {
     ...contentMetadata,
     owner,
-    owner_link: `/?owner=${owner}`,
+    owner_link: `./?owner=${owner}`,
     iscn,
     iscn_link: `https://app.like.co/view/${encodeURIComponent(iscn)}`,
     keywords: keywords == "" ? null : keywordList,
