@@ -10,9 +10,9 @@
     <header></header>
     <div class="container">
       <div><a class="gradient-text" href="/">ISCN Browser</a></div>
-      <div>
-        <h3>Trending Tags</h3>
-        <ul id="tags"></ul>
+      <div id="tags-list">
+        <h3>Featured Tags</h3>
+        <ul data-bind="tags" data-attr="list"></ul>
       </div>
       <div id="block-list">Loading...</div>
     </div>
@@ -38,5 +38,12 @@
         <p class="time-stamp" data-bind="timestamp"></p>
       </div>
     </a>
+  </template>
+  <template id="tag">
+    <li>
+      <a data-attr="href" data-bind="link">
+        <span data-bind="tag"></span>
+      </a>
+    </li>
   </template>
 </html>

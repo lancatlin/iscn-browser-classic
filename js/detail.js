@@ -23,42 +23,53 @@ async function loadRecord() {
   const { records } = res.data;
   const record = records[0];
 
-  const { owner, contentMetadata, contentFingerprints } = record.data;
+  const {
+    owner,
+    contentMetadata,
+    contentFingerprints,
+    recordTimestamp,
+    stakeholders,
+  } = record.data;
   console.log(contentMetadata);
   const { name, keywords } = contentMetadata;
   document.title = name;
 
-  const keywordList = keywords
-    .split(",")
-    .map(
-      (k) => `
-    <li><a href="./?keywords=${k}">${k}</a></li>
-    `
-    )
-    .join("");
+  const keywordList = keywords.split(",").map((k) =>
+    render("keyword", {
+      keyword: k,
+      link: `./?keywords=${k}`,
+    })
+  );
 
   const fingerprintList = contentFingerprints
-    ? contentFingerprints
-        .map(
-          (v) => `
-    <li><a target="_blank" href="${fingerprintLink(v)}">${v}</a></li>
-    `
-        )
-        .join("")
+    ? contentFingerprints.map((v) =>
+        render("fingerprint", {
+          fingerprint: v,
+          link: fingerprintLink(v),
+        })
+      )
     : null;
+
+  console.log(stakeholders);
+  const stakeholderList = stakeholders.map(({ entity }) =>
+    render("stakeholder", {
+      ...entity,
+      link: `./?stakeholders.entity.name=${entity.name}`,
+    })
+  );
 
   const ctx = {
     ...contentMetadata,
     owner,
+    recordTimestamp,
     owner_link: `./?owner=${owner}`,
     iscn,
     iscn_link: `https://app.like.co/view/${encodeURIComponent(iscn)}`,
     keywords: keywords == "" ? null : keywordList,
     contentFingerprints: fingerprintList,
+    stakeholders: stakeholderList,
   };
-  document
-    .getElementById("detail")
-    .replaceChildren(await render("detail", ctx));
+  render("detail", ctx, false);
 }
 
 loadRecord();

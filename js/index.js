@@ -4,13 +4,13 @@ import { ENDPOINT, api } from "./config.js";
 const tags = ["LikeCoin", "香港", "Cosmos"];
 
 function tagList() {
-  document.getElementById("tags").innerHTML = tags
-    .map(
-      (tag) => `
-  <li><a href="./?keywords=${tag}">${tag}</a></li>
-  `
-    )
-    .join("");
+  const taglist = tags.map((tag) =>
+    render("tag", {
+      tag,
+      link: `./?keywords=${tag}`,
+    })
+  );
+  render("tags-list", { tags: taglist }, false);
 }
 
 async function loadBlocks() {
@@ -33,7 +33,6 @@ async function loadBlocks() {
           iscn,
           timestamp: datetime_string,
           ...content,
-          tags: tagList(tags),
         })
       );
     }

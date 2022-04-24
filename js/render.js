@@ -1,5 +1,5 @@
-function render(partial_name, context) {
-  const elem = loadBlock(partial_name);
+function render(partial_name, context, create = true) {
+  const elem = loadBlock(partial_name, create);
   const attrBindings = elem.querySelectorAll("[data-bind]");
   attrBindings.forEach((elem) => {
     bindAttribute(elem, contextValue(elem, context));
@@ -24,15 +24,16 @@ function bindAttribute(elem, value) {
   }
   if (!attr) {
     elem.innerHTML = value;
+  } else if (attr == "list" && value) {
+    elem.replaceChildren(...value);
   } else {
     elem[attr] = value;
   }
 }
 
-function loadBlock(id) {
-  const elem = document.querySelector(`template#${id}`);
-  console.log(elem);
-  return elem.content.cloneNode(true);
+function loadBlock(id, create) {
+  const elem = document.getElementById(id);
+  return create ? elem.content.cloneNode(true) : elem;
 }
 
 export default render;
