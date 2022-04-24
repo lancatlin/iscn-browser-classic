@@ -1,13 +1,24 @@
 <h1 data-bind="name|title"></h1>
 <p data-bind="description|descrption"></p>
-<p>URL: <a target="_blank" data-bind="url" data-attr="href"><span data-bind="url"></span></a></p>
-<p>ISCN: 
-  <span data-bind="iscn"></span> 
-  <a target="_blank" data-attr="href" data-bind="iscn_link">Open on app.like.co</a></p>
-<p>Owned by: 
-  <a data-bind="owner_link" data-attr="href"><span data-bind="owner"></span></a></p>
-<p>Keywords: </p>
+<p>
+  URL:
+  <a target="_blank" data-bind="url" data-attr="href"
+    ><span data-bind="url"></span
+  ></a>
+</p>
+<p>
+  ISCN:
+  <span data-bind="iscn"></span>
+  <a target="_blank" data-attr="href" data-bind="iscn_link"
+    >Open on app.like.co</a
+  >
+</p>
+<p>
+  Owned by:
+  <a data-bind="owner_link" data-attr="href"><span data-bind="owner"></span></a>
+</p>
+<p>Keywords:</p>
 <ul data-bind="keywords"></ul>
-<p>Content Fingerprints: </p>
+<p>Content Fingerprints:</p>
 <ul data-bind="contentFingerprints"></ul>
 <!-- <embed data-bind="ipfs" data-attr="src" width="1000" height="700">IPFS link</embed> -->

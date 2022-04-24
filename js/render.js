@@ -1,26 +1,24 @@
-async function render(partial_name, context) {
-  const block = await loadBlock(partial_name);
-  const elem = document.createElement("div");
-  elem.innerHTML = block;
+function render(partial_name, context) {
+  const elem = loadBlock(partial_name);
   const attrBindings = elem.querySelectorAll("[data-bind]");
-  attrBindings.forEach(elem => {
+  attrBindings.forEach((elem) => {
     bindAttribute(elem, contextValue(elem, context));
   });
   return elem;
 }
 
 function contextValue(elem, context) {
-  const keys = elem.getAttribute("data-bind").split("|")
+  const keys = elem.getAttribute("data-bind").split("|");
   for (const key of keys) {
     if (context[key]) {
-      return context[key]
+      return context[key];
     }
   }
-  return null
+  return null;
 }
 
 function bindAttribute(elem, value) {
-  const attr = elem.getAttribute("data-attr")
+  const attr = elem.getAttribute("data-attr");
   if (!value) {
     elem.hidden = true;
   }
@@ -31,10 +29,10 @@ function bindAttribute(elem, value) {
   }
 }
 
-async function loadBlock(partial_name) {
-  const res = await axios.get(`./partials/${partial_name}.html`);
-  return res.data;
+function loadBlock(id) {
+  const elem = document.querySelector(`template#${id}`);
+  console.log(elem);
+  return elem.content.cloneNode(true);
 }
-
 
 export default render;

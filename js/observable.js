@@ -1,5 +1,5 @@
 class Observable {
-  constructor (value) {
+  constructor(value) {
     this._value = value;
   }
   subscribe(callback) {
